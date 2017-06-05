@@ -1,6 +1,6 @@
 # TARGET #
 
-TARGET := ALL
+TARGET := 3DS
 LIBRARY := 0
 
 ifeq ($(TARGET),$(filter $(TARGET),3DS WIIU))
@@ -20,10 +20,10 @@ SOURCE_DIRS := source
 
 EXTRA_OUTPUT_FILES :=
 
-LIBRARY_DIRS :=
-LIBRARIES :=
+LIBRARY_DIRS := $(PWD)
+LIBRARIES := python
 
-BUILD_FLAGS :=
+BUILD_FLAGS := -I$(DEVKITPRO)/portlibs/armv6k/include/python3.6m
 BUILD_FLAGS_CC :=
 BUILD_FLAGS_CXX :=
 RUN_FLAGS :=
@@ -43,6 +43,7 @@ endif
 # 3DS CONFIGURATION #
 
 ifeq ($(TARGET),3DS)
+	APP_ROMFS=romfs/
     LIBRARY_DIRS += $(DEVKITPRO)/libctru
     LIBRARIES += ctru
 
