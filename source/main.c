@@ -1,13 +1,12 @@
 #include <stdio.h>
-char stack_top[0x100000];
 #include <3ds.h>
 #include <Python.h>
-uint32_t old_sp;
+uint32_t __stacksize__ = 0x100000;
 void abort() {
     printf("Aborting\n");
     for(;;);
 }
-int main2() {
+int main() {
     gfxInitDefault();
     consoleInit(GFX_TOP, NULL);
     int useSD=1;
@@ -45,12 +44,4 @@ int main2() {
     Py_Finalize();
     gfxExit();
     return 0;
-}
-int main() {
-    char *s=stack_top;
-    uint32_t t=(uint32_t)(s)+0x100000;
-    asm volatile("mov %0, sp" : "=r"(old_sp));
-    asm volatile("mov sp, %0" ::"r"(t));
-    main2();
-    asm volatile("mov sp, %0":: "r"(old_sp));
 }
