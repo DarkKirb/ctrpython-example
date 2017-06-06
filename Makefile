@@ -24,7 +24,7 @@ LIBRARY_DIRS := $(PWD)
 LIBRARIES := python
 
 BUILD_FLAGS := -I$(DEVKITPRO)/portlibs/armv6k/include/python3.6m
-BUILD_FLAGS_CC :=
+BUILD_FLAGS_CC := -Wno-unused -Wno-unused-variable
 BUILD_FLAGS_CXX :=
 RUN_FLAGS :=
 

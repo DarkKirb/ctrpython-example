@@ -1,11 +1,8 @@
 #include <stdio.h>
 #include <3ds.h>
 #include <Python.h>
+#include "ctr.py.h"
 uint32_t __stacksize__ = 0x100000;
-void abort() {
-    printf("Aborting\n");
-    for(;;);
-}
 int main() {
     gfxInitDefault();
     consoleInit(GFX_TOP, NULL);
@@ -20,6 +17,7 @@ int main() {
     Py_FrozenFlag = 1;
     Py_NoSiteFlag = 1;
     Py_DebugFlag = 1;
+    PyImport_AppendInittab("svc", PyInit_svc);
     Py_Initialize();
     PyRun_SimpleString("import sys");
     PyRun_SimpleString("print('Initializing Python3.7')");
